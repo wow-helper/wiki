@@ -1,0 +1,35 @@
+.EditorPage {
+
+}
+.EditorMDX{
+  display: flex;
+  padding: 16px;
+  >div{
+    flex: 1;
+    &:first-child{
+      margin-right: 16px;
+    }
+  }
+
+  .playground-draw,
+  .playground-write {
+    font-size: 14px;
+    letter-spacing: normal;
+    line-height: calc(1em + 1ex);
+    tab-size: 4;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background: transparent;
+    border: none;
+    box-sizing: border-box;
+    height: 100%;
+    margin: 0;
+    outline: none;
+    overflow: hidden;
+    padding: 0;
+    resize: none;
+    width: 100%;
+
+    border: 2px solid red;
+  }
+}

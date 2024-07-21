@@ -6,6 +6,13 @@
 
 import {themes as prismThemes} from 'prism-react-renderer';
 
+///======================================================================================================添加覆盖新配置
+// require('./wow/wow_prism');
+const addOverrideNewConfig = {
+  plugins: ['docusaurus-plugin-sass'],
+}
+///======================================================================================================添加覆盖新配置end
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'WOW Helper',
@@ -134,8 +141,11 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
+        // additionalLanguages: ['wowmacro'],
       },
     }),
+
+  ...addOverrideNewConfig,
 };
 
 export default config;
