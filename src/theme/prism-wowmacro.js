@@ -7,7 +7,7 @@
 //         'token-name': /nochanneling/,
 //     };
 // }
-import {Prism} from "prism-react-renderer";
+// import {Prism} from "prism-react-renderer";
 
 Prism.languages.wowmacro = {
     "comment": {
