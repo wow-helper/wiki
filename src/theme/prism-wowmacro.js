@@ -1,13 +1,5 @@
-// https://github.com/wasp-lang/wasp/blob/2ce28f9e6f210a33c5b6eff263ba78a816136302/web/src/prism/wasp.js
-
-
-// Converted from the TextMate definition at https://github.com/wasp-lang/vscode-wasp/blob/main/syntaxes/wasp.tmLanguage.yaml
-// module.exports = (Prism) => {
-//     Prism.languages['wowmacro'] = {
-//         'token-name': /nochanneling/,
-//     };
-// }
-// import {Prism} from "prism-react-renderer";
+// import {Prism} from "prism-react-renderer"; // 不需要 全局有 Prism
+// https://github.com/PrismJS/prism/tree/master/components 按这里面的文件实现一个就行 也没有引入 Prism
 
 Prism.languages.wowmacro = {
     "comment": {
