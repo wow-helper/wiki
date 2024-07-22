@@ -47,16 +47,14 @@ const grammars = [
 
 
 export class Editor extends React.Component {
-    starryNight = null
-    html = ''
-    // sample
-    markdown = `# Hello, world!
-
-Below is an example of markdown in JSX.
-
-<div style={{backgroundColor: 'violet', padding: '1rem'}}>
-  Try and change the background color to \`tomato\`.
-</div>`
+    onChange = (data) => {
+        // 通知父组件更新
+    };
+    constructor(props) {
+        super(props);
+        this.markdown = props.markdown;
+        this.onChange = props.onChange;
+    }
 
     componentDidMount() {
         // const editor = document.querySelector('#js-editor')
@@ -68,10 +66,44 @@ Below is an example of markdown in JSX.
                 throw new Error('Unexpected missing required scopes: `' + missing + '`')
             }
             // root.render(<Playground />)
-            this.setState({})
+            // this.setState({})
             this.start();
         })
     }
+
+    // shouldComponentUpdate(nextProps, nextState, nextContext) {
+    //     // 检查 state 中是否有任何属性发生了变化
+    //     for (const key in this.state) {
+    //         if (this.state[key] !== nextState[key]) {
+    //             return true; // 有变化，需要更新
+    //         }
+    //     }
+    //     // 检查 props 中是否有任何属性发生了变化
+    //     for (const key in this.props) {
+    //         if (this.props[key] !== nextProps[key]) {
+    //             return true; // 有变化，需要更新
+    //         }
+    //     }
+    //     // 没有变化，不需要更新
+    //     return false;
+    // }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.markdown !== prevProps.markdown) {
+            this.handleMarkdownChange({target: {value: this.props.markdown}});
+        }
+    }
+
+    starryNight = null
+    html = ''
+    // sample
+    markdown = `# Hello, world!
+
+Below is an example of markdown in JSX.
+
+<div style={{backgroundColor: 'violet', padding: '1rem'}}>
+  Try and change the background color to \`tomato\`.
+</div>`
 
     async go() {
         const toc = []
@@ -153,6 +185,7 @@ Below is an example of markdown in JSX.
         this.markdown = event.target.value;
         this.setState({});
         this.start();
+        this.onChange(this.markdown);
     }
 
     render() {
