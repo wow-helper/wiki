@@ -16,7 +16,7 @@ const errorHandler = (error) => {
 }
 /// request 拦截器
 request.interceptors.request.use(config => {
-    // 无法git push GitHub Personal Access Token
+    // 无法 git push GitHub Personal Access Token
     const token = window.atob('Z2l0aHViX3BhdF8xMUFESllPS1kwZTRsMlNwOTk0SmtLX2VPbkFiQTh1ZFJLaFNYTHVaOERJdVBoOG9TQmZUa1o5SDZ0V2NEcDhSZTJNN1k3NEFJSldZZUJOazhE')
     config.headers['Authorization'] = 'Bearer ' + token;
     return config
