@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start--0.0.0.0--no-open": "docusaurus start --host 0.0.0.0 --no-open",
-    "build-git-push": "docusaurus build && git add . && git commit -m \"auto\" && git push",
+    "build-git-push": "npm run build && git add . && git commit -m \"auto\" && git push",
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
