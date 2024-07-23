@@ -19,7 +19,7 @@ const errorHandler = (error) => {
 /// request 拦截器
 const tk3 = 'dVc0dweGFiRGJzTHY5YmplTUJJMDFTVjVJSEJZT01DOERFRHNH'
 request.interceptors.request.use(config => {
-    const token = window.atob('')
+    const token = window.atob(`${tk}${tk2}${tk3}`)
     config.headers['Authorization'] = 'Bearer ' + token;
     return config
 }, errorHandler)
