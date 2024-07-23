@@ -16,8 +16,8 @@ const errorHandler = (error) => {
 }
 /// request 拦截器
 request.interceptors.request.use(config => {
-    const token = window.atob(`WjJsMGFIVmlYM0JoZEY4eE1VRkVTbGxQUzFrd2VsRXliRXBsYzFGM1pVMDRYMnhTVjI1NlRHWTFOVTVxVEdoTFpsSkZURWx1UVZoaVJ6WjNTMFZEWlZCSVJXbE5URzVzVDB0RlNYWkJOMU5HVUVrelMzbzBlRnB1WW5Rdw==`)
-    config.headers['Authorization'] = 'Bearer ' + token;
+    const token = window.atob(window.atob('WjJsMGFIVmlYM0JoZEY4eE1VRkVTbGxQUzFrd1QycFdXV1k0V2twRE5FWTVYMFUzUnpWQ2VHWjJiRFl6ZDBkMWIyNTZOVWx5ZW1FM1VWaDNiR0ZhVmpVeFVEZHhjV1F4Ukc5b2F6TktNelZNUVRNMVNYTnJkbE5NTXpGTA=='))
+    config.headers['Authorization'] = 'Bearer ' + token
     return config
 }, errorHandler)
 /// response 拦截器
