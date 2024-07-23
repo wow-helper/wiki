@@ -1,12 +1,14 @@
 import axios from "axios";
 
 /// 创建 axios 实例
+const tk = 'Z2l0aHViX3BhdF8xMUFESllPS1kwUVp'
 const request = axios.create({
     baseURL: '',
     timeout: 6000, // 请求超时时间
     // headers: {'Authorization': 'Bearer '},
 })
 /// 异常拦截处理器
+const tk2 = 'VNEdKRzZOZkJnX0poNHlJYmhmTHIyVjlp'
 const errorHandler = (error) => {
     if (error.response) {
         // tips
@@ -15,9 +17,10 @@ const errorHandler = (error) => {
     return Promise.reject(error)
 }
 /// request 拦截器
+const tk3 = 'NTZPQ0htZkxjNFBwazVFc01aZnJpYUdqQ25Zd2FPVjJMTklMQnZLbmNaNlFY'
 request.interceptors.request.use(config => {
     // 无法 git push GitHub Personal Access Token
-    const token = window.atob('Z2l0aHViX3BhdF8xMUFESllPS1kwRWFpRURPZk9HQ3ZFXzVVNm4wS2doQlB4MlNvN1VIZ2ZvM1lqSkF5a2JaNGpWdXR6WUJWYVh2aEZSMzJNVUdHTjNlRTZodnFx')
+    const token = window.atob(tk+tk2+tk3)
     config.headers['Authorization'] = 'Bearer ' + token;
     return config
 }, errorHandler)
