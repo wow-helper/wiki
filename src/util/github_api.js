@@ -15,7 +15,7 @@ const errorHandler = (error) => {
     return Promise.reject(error)
 }
 /// request 拦截器
-const token = window.atob(window.atob('WjJsMGFIVmlYM0JoZEY4eE1VRkVTbGxQUzFrd1QycFdXV1k0V2twRE5FWTVYMFUzUnpWQ2VHWjJiRFl6ZDBkMWIyNTZOVWx5ZW1FM1VWaDNiR0ZhVmpVeFVEZHhjV1F4Ukc5b2F6TktNelZNUVRNMVNYTnJkbE5NTXpGTA=='))
+const token = atob(atob('WjJsMGFIVmlYM0JoZEY4eE1VRkVTbGxQUzFrd1QycFdXV1k0V2twRE5FWTVYMFUzUnpWQ2VHWjJiRFl6ZDBkMWIyNTZOVWx5ZW1FM1VWaDNiR0ZhVmpVeFVEZHhjV1F4Ukc5b2F6TktNelZNUVRNMVNYTnJkbE5NTXpGTA=='))
 request.interceptors.request.use(config => {
     config.headers['Authorization'] = 'Bearer ' + token
     return config
@@ -60,7 +60,7 @@ export function api_github_repo_contents_GET() {
         // 1. 原生js：escape(虽然该方法已经被不推荐使用，但还是有一些特殊用途的，尤其是对中文的编码)
         // escape 暂无替代函数 文档注明已废弃 浏览器可用 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/escape
         // 2. npm package base64：...
-        res.content = decodeURIComponent(escape(window.atob(res.content)));
+        res.content = decodeURIComponent(escape(atob(res.content)));
         return res;
     })
 }
@@ -71,7 +71,7 @@ export function api_github_repo_contents_UPDATA(content, sha) {
     return request({
         url: url,
         method: 'put',
-        data: {"message": message, "content": window.btoa(content), sha: sha}// sha 需要更新文件的时候 必填
+        data: {"message": message, "content": btoa(content), sha: sha}// sha 需要更新文件的时候 必填
     })
 }
 
@@ -81,6 +81,6 @@ export function api_github_repo_contents_CREATE(content) {
     return request({
         url: url,
         method: 'put',
-        data: {"message": message, "content": window.btoa(content)}// sha 需要更新文件的时候 必填
+        data: {"message": message, "content": btoa(content)}// sha 需要更新文件的时候 必填
     })
 }
