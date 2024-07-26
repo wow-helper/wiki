@@ -15,8 +15,8 @@ const errorHandler = (error) => {
     return Promise.reject(error)
 }
 /// request 拦截器
-const token = window.atob(window.atob('WjJsMGFIVmlYM0JoZEY4eE1VRkVTbGxQUzFrd1QycFdXV1k0V2twRE5FWTVYMFUzUnpWQ2VHWjJiRFl6ZDBkMWIyNTZOVWx5ZW1FM1VWaDNiR0ZhVmpVeFVEZHhjV1F4Ukc5b2F6TktNelZNUVRNMVNYTnJkbE5NTXpGTA=='))
 request.interceptors.request.use(config => {
+    const token = window.atob(window.atob('WjJsMGFIVmlYM0JoZEY4eE1VRkVTbGxQUzFrd1QycFdXV1k0V2twRE5FWTVYMFUzUnpWQ2VHWjJiRFl6ZDBkMWIyNTZOVWx5ZW1FM1VWaDNiR0ZhVmpVeFVEZHhjV1F4Ukc5b2F6TktNelZNUVRNMVNYTnJkbE5NTXpGTA=='))
     config.headers['Authorization'] = 'Bearer ' + token
     return config
 }, errorHandler)
