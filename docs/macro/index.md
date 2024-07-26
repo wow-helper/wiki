@@ -5,6 +5,19 @@ sidebar_position: 1
 # 宏（Macro）
 
 ## 显示
+### 插件排错
+暂无简介
+```wowmacro
+/console scriptErrors 1 to display LUA errors 显示lua错误
+/console scriptErrors 0 to hide LUA errors 隐藏lua错误
+这两个命令对你应该有帮助
+
+/console scriptErrors 1
+显示lua错误
+
+/console scriptErrors 0
+隐藏lua错误
+```
 ### show
 显示宏第一个技能的图标，后面如果+空格+技能，就固定显示这个技能图标。
 ```wowmacro
