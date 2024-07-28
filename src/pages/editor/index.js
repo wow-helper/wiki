@@ -1,9 +1,20 @@
 import React from "react";
+import "@arco-design/web-react/dist/css/arco.css";
+import {Tree} from '@arco-design/web-react';
+import {IconFile, IconFolder} from "@arco-design/web-react/icon";
+
+const TreeNode = Tree.Node;
 
 import './index.scss';
 import PageCommonEntry from "../_common/_PageCommonEntry";
 import {Editor} from "./_editor";
-import {api_github_repo_contents_GET, api_github_user} from "../../util/github_api";
+import {
+    api_github_git_blobs,
+    api_github_git_trees,
+    api_github_repo_contents,
+    api_github_repo_contents_GET,
+    api_github_user
+} from "../../util/github_api";
 
 export default function EditorPage(props) {
     return (
@@ -13,6 +24,7 @@ export default function EditorPage(props) {
     );
 }
 
+
 class Content extends React.Component {
     constructor(props) {
         super(props);
@@ -20,12 +32,43 @@ class Content extends React.Component {
 
     componentDidMount() {
         api_github_user()
-        api_github_repo_contents_GET().then(response => {
-            this.state.markdown = response.content
+        api_github_repo_contents_GET().then(res => {
+            this.state.markdown = res.content
+            this.setState({})
+        })
+        api_github_repo_contents().then(res => {
+            for (const it of res) {
+                this.treeData.push(this.createTreeNodeData(it.path, it.sha, it.type === "dir"));
+            }
             this.setState({})
         })
     }
 
+    createTreeNodeData(title, key, isNotLeaf = true) {
+        return {
+            title: title,
+            key: key,
+            isLeaf: !isNotLeaf,
+            icon: isNotLeaf ? < IconFolder/> : <IconFile />
+        }
+    }
+
+    treeData = [
+        // {
+        //     title: 'Trunk 0-0',
+        //     key: '0-0',
+        // },
+        // {
+        //     title: 'Trunk 0-1',
+        //     key: '0-1',
+        //     children: [
+        //         {
+        //             title: 'Branch 0-1-1',
+        //             key: '0-1-1',
+        //         },
+        //     ],
+        // },
+    ];
     state = {
         visible: false,
         type: '',
@@ -36,63 +79,17 @@ class Content extends React.Component {
             'PNG',
             'JPG',
             'GIF',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
-            'ICO',
         ],
         '视频': [
             'AVI',
             'MP4',
             'MKV',
-            'WEBM',
-            'WEBM',
-            'WEBM',
-            'WEBM',
-            'WEBM',
-            'WEBM',
-            'WEBM',
-            'WEBM',
-            'WEBM',
-            'WEBM',
-            'WEBM',
-            'WEBM',
-            'WEBM',
-            'WEBM',
-            'WEBM',
+
         ],
         '文档': [
             'PDF',
             'PDF',
             '7z',
-            'ZIP',
-            'ZIP',
-            'ZIP',
-            'ZIP',
-            'ZIP',
-            'ZIP',
-            'ZIP',
-            'ZIP',
             'ZIP',
         ],
     }
@@ -117,17 +114,38 @@ class Content extends React.Component {
         console.log(data);
     }
 
+    loadMore = (treeNode) => {
+        return api_github_git_trees(treeNode.key).then(res=>{
+            treeNode.props.dataRef.children = [];
+            for (const it of res) {
+                treeNode.props.dataRef.children.push(this.createTreeNodeData(it.path, it.sha, it.type === 'tree'));
+            }
+            this.setState({})
+        });
+    }
+
+    onClickTree(selectedKeys,extra) {
+        if(extra.node.props.isLeaf){
+            api_github_git_blobs(extra.node.key).then(res=>{
+                console.log(res.content);
+            });
+        }
+    }
+
     render() {
         return (
             <div className={'EditorPage'}>
-                <Editor markdown={this.state.markdown} onChange={this.onChangeMarkdown}></Editor>
-                {/*{Object.keys(this.options).map((category, index) => (*/}
-                {/*    <ul key={index}>*/}
-                {/*        {this.options[category].map(type => (*/}
-                {/*            <li key={type} onClick={() => this.onChange(type)}>{type}</li>*/}
-                {/*        ))}*/}
-                {/*    </ul>*/}
-                {/*))}*/}
+                <div className={'EditorPage-left'}>
+                    <Tree
+                        actionOnClick={['expand', 'select']}
+                        onSelect={(selectedKeys, extra)=>this.onClickTree(selectedKeys,extra)}
+                        loadMore={(treeNode) => this.loadMore(treeNode)}
+                        treeData={this.treeData}>
+                    </Tree>
+                </div>
+                <div className={'EditorPage-right'}>
+                    <Editor markdown={this.state.markdown} onChange={this.onChangeMarkdown}></Editor>
+                </div>
             </div>
         );
     }
