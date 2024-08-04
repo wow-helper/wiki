@@ -1,5 +1,8 @@
 import axios from "axios";
 
+
+
+/// ===============================================================================================================HTTP
 /// 创建 axios 实例
 const request = axios.create({
     baseURL: '',
@@ -26,6 +29,8 @@ request.interceptors.response.use((response) => {
 }, errorHandler)
 
 
+
+/// ================================================================================================================API
 /*
 * 创建 GitHub Personal Access Token
 * https://github.com/settings/tokens?type=beta
