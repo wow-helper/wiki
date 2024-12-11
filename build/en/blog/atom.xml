@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wow-helper.github.io/wiki/en/blog</id>
-    <title>WOW Helper Blog</title>
+    <title>魔兽世界帮助文档 Blog</title>
     <updated>2021-08-26T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wow-helper.github.io/wiki/en/blog"/>
-    <subtitle>WOW Helper Blog</subtitle>
+    <subtitle>魔兽世界帮助文档 Blog</subtitle>
     <icon>https://wow-helper.github.io/wiki/en/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[Welcome]]></title>

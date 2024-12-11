@@ -15,8 +15,8 @@ const addOverrideNewConfig = {
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'WOW Helper',
-  tagline: 'Dinosaurs are cool',
+  title: '魔兽世界帮助文档',
+  tagline: '分享各种技巧、背景、有趣的内容',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
