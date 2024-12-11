@@ -5,6 +5,7 @@
   "scripts": {
     "start--0.0.0.0--no-open": "docusaurus start --host 0.0.0.0 --no-open",
     "build-git-push": "npm run build && git add . && git commit -m \"auto\" && git push",
+    "===以上是自定义===": "",
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
