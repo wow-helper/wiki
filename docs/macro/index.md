@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# 宏（Macro）
+# 宏（Macro） https://nga.178.com/read.php?tid=19418985 底部有参考资料：
 
 ## 显示
 ### 插件排错
@@ -61,3 +61,41 @@ sidebar_position: 1
 ```
 这个宏的意思是：只有在玩家没有进行奥术飞弹（Arcane Missiles）这个特定的引导技能时，才会施放奥术冲击（Arcane Blast）。
 如果玩家正在引导奥术飞弹，那么奥术冲击将不会被施放。
+
+## 选择目标
+### targetenemy
+/targetenemy 目标敌人(跟TAB一个机制，选正前方90度最远50码由近至远轮流流选目标，只会选视野能看到的目标，不会选遮挡的目标，所有角度内目标选完了重复此过程，DOT职业有用)
+```wowmacro
+/targetenemy [harm][nodead]
+```
+
+## 自动挂机 NGA精华区就有 https://ngabbs.com/read.php?tid=18153442&_fp=2
+### 蓝装拾取确认宏 | 防暂离宏 | 自动买东西
+```wowmacro
+/script T,F=T or 0,F or CreateFrame("frame")if X then X=nil else X=function()local t=GetTime()if t-T>1 then StaticPopup1Button1:Click()T=t end end end F:SetScript ("OnUpdate",X)
+开启时：点一次，聊天窗口打印on；关闭时：再点一次窗口打印off。
+/script T,F=T or 0,F or CreateFrame("frame")if X then X=nil print("OFF.")else print("ON.") X=function()local t=GetTime()if t-T>1 then StaticPopup1Button2:Click()T=t end end end F:SetScript("OnUpdate",X)
+点击1 代表 确定
+/script T,F=T or 0,F or CreateFrame("frame")if X then X=nil print("OFF.")else print("ON.") X=function()local t=GetTime()if t-T>1 then StaticPopup1Button1:Click()T=t end end end F:SetScript("OnUpdate",X)
+```
+```wowmacro
+https://ngabbs.com/read.php?pid=359756733&opt=128
+宏
+防小退宏(可用于不想下线时避免自动小退而再次排队的场景)
+
+魔兽世界必须前台，不可以在休息区域使用，原理为弹出退出游戏20秒倒计时时自动点击取消(依然会处于暂离状态 但不会自动小退)。
+如果是在休息区域，AFK会直接小退不会弹出倒计时，也就是无效！如果失效建议禁用所有插件。
+
+使用方法为新建一个宏，内容为下面代码。
+
+普通版:
+(开启时：点一次，聊天窗口打印on；关闭时：再点一次窗口打印off。检测方法，尝试小退(返回角色选择)，如果不让你小退，证明宏运行成功。)
+但是会自动接受组队 自动释放灵魂等
+/script T,F=T or 0,F or CreateFrame("frame")if X then X=nil print("OFF.")else print("ON.") X=function()local t=GetTime()if t-T>1 then StaticPopup1Button2:Click()T=t end end end F:SetScript("OnUpdate",X)
+
+改良版:
+不会自动接受组队
+/run T,F=T or 0,F or CreateFrame("frame")X=X==nil and function()local t=GetTime()if StaticPopup1:IsShown() and StaticPopup1Button1:GetText()=="取消" and t-T>1 then StaticPopup1Button1:Click()T=t end end or nil;F:SetScript("OnUpdate",X)
+
+https://ngabbs.com/read.php?&tid=18307984&pid=359756733&to=1
+```

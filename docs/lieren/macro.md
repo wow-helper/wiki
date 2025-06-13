@@ -15,7 +15,6 @@ sidebar_position: 1
 - 17级 西部荒野 萨丁农场
 - 17级 西部荒野 中立螃蟹
 ```wowmacro
-/p 挂机中，有事密语。
 /cast [@pet,dead,exists] 复活宠物; [@pet,noexists] 召唤宠物
 /petattack
 /cast 猛禽一击
@@ -23,11 +22,50 @@ sidebar_position: 1
 /stopmacro [exists]
 /targetenemy
 ```
+- /petattack 不要 宠物应该在原地打 被动模式 方便收金币
+```wowmacro
+/cast [@pet,dead,exists] 复活宠物; [@pet,noexists] 召唤宠物
+/cast 猛禽一击
+/cast 猫鼬撕咬
+/cast !自动射击
+/startattack
+/target pettarget
+/stopmacro [exists]
+/targetenemy
+```
+-仅仅切换目标 后面跟着 震荡射击 把近战怪物引过来
+```wowmacro
+/cleartarget
+/target pettarget
+/stopmacro [exists]
+/targetenemy
+```
+- 更好的 可以加一个奥术
+```wowmacro
+/target pettarget
+/stopmacro [combat]
+/targetenemy
+/cast 奥术射击(等级 1)
+```
+- 固定的 避免打到玩家 设置两个可以切换两个目标
+```wowmacro
+#showtooltip
+/target pettarget
+/stopmacro [combat]
+/targetexact 巨型雪人
+/cast 奥术射击(等级 1)
+
+#showtooltip
+/target pettarget
+/stopmacro [combat]
+/targetexact 山岭雪人
+/cast 奥术射击(等级 1)
+```
 ### 挂机原始
 ```wowmacro
 /cast [@pet,dead,exists] 复活宠物; [@pet,noexists] 召唤宠物
 /cast !自动射击
-/castsequence reset=target 猫鼬撕咬,猛禽一击
+/castsequence reset=target 猫鼬撕咬,猛禽一击 // 可能没用 必须先放出猫鼬撕咬
 /petattack
 /stopmacro [exists]
 /targetenemy
@@ -83,10 +121,22 @@ https://bbs.nga.cn/read.php?&tid=18375998&pid=396739279&to=1
 /petattack
 ```
 
-### 技能绑定宠物跟随（停止）宏
+### 技能绑定宠物回防宏（回到身边，停止进攻）
 ```wowmacro
 #showtooltip
 /cast 技能
 /petfollow
 /petpassive
+```
+
+### 假死冰冻宏
+假死冰冻宏 (非战斗不会释放假死，只会放冰冻并收宝宝停止，怪物顺价施法，需要按两下，陷阱可变换为其他陷阱)
+```wowmacro
+/petpassive
+/petfollow
+/stoppcasting
+/cleartarget
+/cast [combat]假死
+/cast 冰冻陷阱
+/targetlastenemy
 ```
