@@ -1,8 +1,12 @@
 .EditorPage {
+  --editor-gray-f5: #f5f5f5;
+  --editor-gray-e5: #e5e5e5;
+
   display: flex;
   .EditorPage-left{
     width: 250px;
-    overflow: scroll;
+    height: calc(100vh - 0px);
+    overflow: auto;
     .arco-tree-node{
       .arco-tree-node-switcher{
         //display: none;
@@ -42,14 +46,31 @@
     }
   }
   .EditorPage-right{
+    flex: 1;
+    //min-height: calc(100vh - 0px);
     .EditorMDX{
       display: flex;
+      height: 100%;
       padding: 16px;
+      background-color: var(--editor-gray-f5);
       >div{
         flex: 1;
+        height: 100%;
+        background-color: white;
         &:first-child{
-          margin-right: 16px;
+          margin-right: 8px;
         }
+      }
+      .EditorMarkdown{
+        padding: 8px;
+        border: 1px solid var(--editor-gray-e5);
+      }
+      .EditorHTML{
+        padding: 8px;
+        border: 1px solid var(--editor-gray-e5);
+      }
+      .EditorHTMLOutput{
+        //
       }
 
       .playground-draw,
@@ -70,8 +91,6 @@
         padding: 0;
         resize: none;
         width: 100%;
-
-        border: 2px solid red;
       }
     }
   }

@@ -31,13 +31,14 @@ runas /user:domain\username cmd.exe | sanur mysekritpassword
 　　将AllowedRegions区域加入CN;US;EU;KR
 　　Regions就是你的登录可以选择的区域，CN就是国服;US美服;EU欧服;KR韩/台服。(根据自己的喜好选择对应的区域)
 　　Locales是你的登录器语言，加入zhCN就是简体中文版登录器。
-　　"Client":
-　　{
-　　"AllowedRegions": "CN;US;EU;KR",
-　　"AllowedLocales": "zhCN;deDE;enGB;enUS;esMX;esES;frFR;itIT;plPL;ptBR;ruRU;koKR;zhTW"
-　　}
-　　},
----------------------
+    ```json
+    　　"Client":
+        　　{
+            　　"AllowedRegions": "CN;US;EU;KR",
+            　　"AllowedLocales": "zhCN;deDE;enGB;enUS;esMX;esES;frFR;itIT;plPL;ptBR;ruRU;koKR;zhTW"
+        　　}
+    　　},
+    ```
 修改不成功的看这里：出现这种情况的大部分应该都是安装或者拷贝了几个不同的战网客户端，然后在修改Battle.net.config文件时 没有修改到与自己所使用的客户端相对应的client语法。
 ①按着上面第一步的方法打开Battle.net.config文件
 ②找到文件里所有的client语法，把所有client语法下的AllowedRegions、AllowedLocales按照第二步修改，然后保存

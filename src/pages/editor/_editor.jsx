@@ -191,14 +191,14 @@ Below is an example of markdown in JSX.
     render() {
         return (
             <div className={'EditorMDX'}>
-                <div>
-                    <h1>Markdown 编辑器</h1>
+                <div className={'EditorMarkdown'}>
+                    {/*<h1>Markdown 编辑器</h1>*/}
                     <textarea className={'playground-write'} rows={9} value={this.markdown}
                               onChange={this.handleMarkdownChange}/>
                 </div>
-                <div>
-                    <h1>HTML 预览</h1>
-                    <div dangerouslySetInnerHTML={{__html: this.html}}></div>
+                <div className={'EditorHTML'}>
+                    {/*<h1>HTML 预览</h1>*/}
+                    <div className={'EditorHTMLOutput'} dangerouslySetInnerHTML={{__html: this.html}}></div>
                 </div>
             </div>
         );

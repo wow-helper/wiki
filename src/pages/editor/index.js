@@ -33,7 +33,14 @@ class Content extends React.Component {
     componentDidMount() {
         api_github_user()
         api_github_repo_contents_GET().then(res => {
-            this.state.markdown = res.content
+            // this.state.markdown = res.content
+            this.state.markdown = `
+export function Thing() {
+  return <>World</>
+}
+
+# Hello <Thing />
+            `
             this.setState({})
         })
         api_github_repo_contents().then(res => {
