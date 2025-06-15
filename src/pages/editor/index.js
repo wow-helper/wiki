@@ -15,6 +15,7 @@ import {
     api_github_repo_contents_GET,
     api_github_user
 } from "../../util/github_api";
+import {logGroup} from "../../util/console";
 
 export default function EditorPage(props) {
     return (
@@ -33,14 +34,8 @@ class Content extends React.Component {
     componentDidMount() {
         api_github_user()
         api_github_repo_contents_GET().then(res => {
-            // this.state.markdown = res.content
-            this.state.markdown = `
-export function Thing() {
-  return <>World</>
-}
-
-# Hello <Thing />
-            `
+            logGroup('README.md', res.content)
+            this.state.markdown = res.content
             this.setState({})
         })
         api_github_repo_contents().then(res => {
@@ -56,7 +51,7 @@ export function Thing() {
             title: title,
             key: key,
             isLeaf: !isNotLeaf,
-            icon: isNotLeaf ? < IconFolder/> : <IconFile />
+            icon: isNotLeaf ? < IconFolder/> : <IconFile/>
         }
     }
 
@@ -77,39 +72,20 @@ export function Thing() {
         // },
     ];
     state = {
-        visible: false,
+        // visible: false,
         type: '',
         markdown: '',
     }
-    options = {
-        '图像': [
-            'PNG',
-            'JPG',
-            'GIF',
-        ],
-        '视频': [
-            'AVI',
-            'MP4',
-            'MKV',
 
-        ],
-        '文档': [
-            'PDF',
-            'PDF',
-            '7z',
-            'ZIP',
-        ],
-    }
+    // onShow() {
+    //     this.state.visible = true;
+    //     this.setState({})
+    // }
 
     onChange(type) {
         this.state.type = type;
         this.props.onChange(type);
         this.onHide()
-    }
-
-    onShow() {
-        this.state.visible = true;
-        this.setState({})
     }
 
     onHide() {
@@ -122,19 +98,22 @@ export function Thing() {
     }
 
     loadMore = (treeNode) => {
-        return api_github_git_trees(treeNode.key).then(res=>{
+        return api_github_git_trees(treeNode.key).then(res => {
             treeNode.props.dataRef.children = [];
             for (const it of res) {
-                treeNode.props.dataRef.children.push(this.createTreeNodeData(it.path, it.sha, it.type === 'tree'));
+                const nodeData = this.createTreeNodeData(it.path, it.sha, it.type === 'tree')
+                treeNode.props.dataRef.children.push(nodeData);
             }
             this.setState({})
         });
     }
 
-    onClickTree(selectedKeys,extra) {
-        if(extra.node.props.isLeaf){
-            api_github_git_blobs(extra.node.key).then(res=>{
-                console.log(res.content);
+    onClickTree(selectedKeys, extra) {
+        if (extra.node.props.isLeaf) {
+            api_github_git_blobs(extra.node.key).then(res => {
+                logGroup(extra.node.props.title, res.content)
+                this.state.markdown = res.content
+                this.setState({})
             });
         }
     }
@@ -145,7 +124,7 @@ export function Thing() {
                 <div className={'EditorPage-left'}>
                     <Tree
                         actionOnClick={['expand', 'select']}
-                        onSelect={(selectedKeys, extra)=>this.onClickTree(selectedKeys,extra)}
+                        onSelect={(selectedKeys, extra) => this.onClickTree(selectedKeys, extra)}
                         loadMore={(treeNode) => this.loadMore(treeNode)}
                         treeData={this.treeData}>
                     </Tree>

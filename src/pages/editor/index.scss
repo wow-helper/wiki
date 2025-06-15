@@ -2,11 +2,16 @@
   --editor-gray-f5: #f5f5f5;
   --editor-gray-e5: #e5e5e5;
 
+  background-color: var(--editor-gray-f5);
+  padding: 16px;
   display: flex;
   .EditorPage-left{
     width: 250px;
-    height: calc(100vh - 0px);
+    height: calc(100vh - 32px);
     overflow: auto;
+    background-color: white;
+    padding: 16px;
+    margin-right: 16px;
     .arco-tree-node{
       .arco-tree-node-switcher{
         //display: none;
@@ -42,55 +47,23 @@
       }
       .arco-tree-node-title{
         display: flex;
+        width: 100%;
       }
     }
   }
   .EditorPage-right{
     flex: 1;
     //min-height: calc(100vh - 0px);
-    .EditorMDX{
-      display: flex;
+    padding: 16px;
+    background-color: white;
+    border: 1px solid var(--editor-gray-e5);
+    .Editor{
+      width: 100%;
       height: 100%;
-      padding: 16px;
-      background-color: var(--editor-gray-f5);
-      >div{
-        flex: 1;
-        height: 100%;
-        background-color: white;
-        &:first-child{
-          margin-right: 8px;
-        }
-      }
-      .EditorMarkdown{
-        padding: 8px;
-        border: 1px solid var(--editor-gray-e5);
-      }
-      .EditorHTML{
-        padding: 8px;
-        border: 1px solid var(--editor-gray-e5);
-      }
-      .EditorHTMLOutput{
-        //
-      }
-
-      .playground-draw,
-      .playground-write {
-        font-size: 14px;
-        letter-spacing: normal;
-        line-height: calc(1em + 1ex);
-        tab-size: 4;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        background: transparent;
-        border: none;
-        box-sizing: border-box;
-        height: 100%;
-        margin: 0;
-        outline: none;
-        overflow: hidden;
-        padding: 0;
-        resize: none;
+      >textarea{
         width: 100%;
+        height: 100%;
+        border: none;
       }
     }
   }

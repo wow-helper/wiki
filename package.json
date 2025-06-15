@@ -25,6 +25,7 @@
     "axios": "^1.7.2",
     "clsx": "^2.0.0",
     "docusaurus-plugin-sass": "^0.2.5",
+    "esbuild-wasm": "^0.25.5",
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
